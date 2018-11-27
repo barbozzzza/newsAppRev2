@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class NewsAdapter extends ArrayAdapter<News> {
+public class NewsAdapter extends ArrayAdapter<NewsStory> {
 
 
-    public NewsAdapter(Activity context, ArrayList<News> newslist){
+    public NewsAdapter(Activity context, ArrayList<NewsStory> newslist){
         super(context,0,newslist);
 
     }
@@ -24,11 +24,11 @@ public class NewsAdapter extends ArrayAdapter<News> {
         View articleList = convertView;
         if(articleList == null) {
 
-            articleList = LayoutInflater.from(getContext()).inflate(R.layout.news_list, parent, false);
+            articleList = LayoutInflater.from(getContext()).inflate(R.layout.activity_news, parent, false);
 
         }
 
-        News currentArticle = getItem(position);
+        NewsStory currentArticle = getItem(position);
 
         assert currentArticle != null;
         String currentAuthor = (currentArticle.getmAuthor());

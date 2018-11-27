@@ -18,12 +18,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>{
+public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsStory>>{
 
 
     public static final String LOG_TAG = NewsActivity.class.getName();
     private static final String REQUEST_URL =
-            "https://content.guardianapis.com/search?api-key=d4dff5df-f99f-43a0-ad42-a2eee1a80072";
+            " http://content.guardianapis.com/search?&show-tags=contributor&q=%27tech%27&api-key=2bbbc59c-5b48-46a5-83d3-8435d3136348";
 
     private static final int NEWS_LOADER_ID= 1;
 
@@ -34,43 +34,38 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+        setContentView(R.layout.news_list);
 
         ListView NewsListView = (ListView)findViewById(R.id.article_list_item);
 
          mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
-            if (NewsListView != null) {
+
                 NewsListView.setEmptyView(mEmptyStateTextView);
-            }
 
 
-        mNewsAdapter = new NewsAdapter(this,new ArrayList<News>());
+
+        mNewsAdapter = new NewsAdapter(this,new ArrayList<NewsStory>());
 
 
-        if (NewsListView != null) {
-            NewsListView.setAdapter(mNewsAdapter);
-        }
+        NewsListView.setAdapter(mNewsAdapter);
 
 
-        if (NewsListView != null) {
-            NewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        News currentArticle = mNewsAdapter.getItem(position);
+        NewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    NewsStory currentArticle = mNewsAdapter.getItem(position);
 
-                        Uri articleUri = Uri.parse(currentArticle != null ? currentArticle.getmUrl() : null);
+                    Uri articleUri = Uri.parse(currentArticle.getmUrl());
 
-                        Intent openWebSite = new Intent(Intent.ACTION_VIEW,articleUri);
+                    Intent openWebSite = new Intent(Intent.ACTION_VIEW,articleUri);
 
-                        startActivity(openWebSite);
-                    }
-                });
-        }
+                    startActivity(openWebSite);
+                }
+            });
 
         ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
 
         if(networkInfo != null && networkInfo.isConnected()){
             LoaderManager loaderManager = getLoaderManager();
@@ -84,25 +79,21 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
 
-
-
-
         }
 
         @Override
-    public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
+    public Loader<List<NewsStory>> onCreateLoader(int i, Bundle bundle) {
 
         Log.i(LOG_TAG, "news activity called");
         return new NewsLoader(this,REQUEST_URL);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<News>> loader, List<News> news) {
+    public void onLoadFinished(Loader<List<NewsStory>> loader, List<NewsStory> news) {
         View loadingIndicator = findViewById(R.id.loading_indicator);
-        if(loadingIndicator != null)
         loadingIndicator.setVisibility(View.GONE);
-        if(loadingIndicator != null)
-        mEmptyStateTextView.setText(R.string.no_connection);
+
+        mEmptyStateTextView.setText(R.string.no_articles);
 
         mNewsAdapter.clear();
 
@@ -113,7 +104,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoaderReset(Loader<List<News>> loader) {
+    public void onLoaderReset(Loader<List<NewsStory>> loader) {
 
         mNewsAdapter.clear();
 

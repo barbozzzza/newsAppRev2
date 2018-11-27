@@ -6,7 +6,7 @@ import android.content.AsyncTaskLoader;
 
 import java.util.List;
 
-public class NewsLoader  extends AsyncTaskLoader<List<News>> {
+public class NewsLoader  extends AsyncTaskLoader<List<NewsStory>> {
 
     // Log message
     private static final String LOG_TAG = NewsLoader.class.getName();
@@ -28,13 +28,13 @@ public class NewsLoader  extends AsyncTaskLoader<List<News>> {
 
 
     @Override
-    public List<News> loadInBackground() {
+    public List<NewsStory> loadInBackground() {
         if (mUrl == null) {
 
 
             return null;
         }
-        List<News> news = QueryUtils.fetchNewsData(mUrl);
+        List<NewsStory> news = QueryUtils.fetchNewsStoryData(mUrl);
         return news;
     }
 }

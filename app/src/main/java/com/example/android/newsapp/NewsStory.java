@@ -1,14 +1,14 @@
 package com.example.android.newsapp;
 
-public class News {
+public class NewsStory {
 
     private String mAuthor;
     private String mArticleTitle;
-    private Long mDate;
+    private String mDate;
     private String mUrl;
 
 
-    public News(String Author, String ArticleTitle, Long Date, String Url){
+    public NewsStory(String Author, String ArticleTitle, String Date, String Url){
 
         mAuthor = Author;
         mArticleTitle = ArticleTitle;
@@ -21,7 +21,7 @@ public class News {
 
     public String getmArticleTitle() {return mArticleTitle;}
 
-    public long getmDate() {return mDate;}
+    public String getmDate() {return mDate;}
 
     public String getmUrl() {return mUrl;}
 

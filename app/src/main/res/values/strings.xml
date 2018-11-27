@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">newsApp</string>
+
+    <string name="no_connection">Please check network connection</string>
+</resources>

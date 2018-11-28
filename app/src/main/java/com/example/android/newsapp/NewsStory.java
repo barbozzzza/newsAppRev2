@@ -6,14 +6,16 @@ public class NewsStory {
     private String mArticleTitle;
     private String mDate;
     private String mUrl;
+    private String mSectionName;
 
 
-    public NewsStory(String Author, String ArticleTitle, String Date, String Url){
+    public NewsStory(String ArticleTitle, String Author,  String Date, String Url,String SectionName){
 
         mAuthor = Author;
         mArticleTitle = ArticleTitle;
         mDate = Date;
         mUrl = Url;
+        mSectionName = SectionName;
 
     }
 
@@ -24,6 +26,8 @@ public class NewsStory {
     public String getmDate() {return mDate;}
 
     public String getmUrl() {return mUrl;}
+
+    public String getmSectionName() {return mSectionName;}
 
 
 

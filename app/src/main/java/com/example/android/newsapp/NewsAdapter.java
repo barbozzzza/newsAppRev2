@@ -8,7 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class NewsAdapter extends ArrayAdapter<NewsStory> {
 
@@ -30,19 +34,40 @@ public class NewsAdapter extends ArrayAdapter<NewsStory> {
 
         NewsStory currentArticle = getItem(position);
 
-        assert currentArticle != null;
+
         String currentAuthor = (currentArticle.getmAuthor());
 
         TextView author = (TextView) articleList.findViewById(R.id.article_author);
         author.setText(currentAuthor);
 
-        String currentTitle = currentArticle.getmArticleTitle();
 
-        TextView Title = (TextView) articleList.findViewById(R.id.article_title);
-        Title.setText(currentTitle);
+        String currentArticleTitle = (currentArticle.getmArticleTitle());
+
+        TextView title = (TextView) articleList.findViewById(R.id.article_title);
+        title.setText(currentArticleTitle);
+
+
+
+
+        String currentDate = (currentArticle.getmDate());
+
+
 
         TextView date = (TextView) articleList.findViewById(R.id.article_date);
-        date.setText((CharSequence) date);
+        date.setText(currentDate);
+
+        String currentSection = (currentArticle.getmSectionName());
+
+
+        TextView section = (TextView) articleList.findViewById(R.id.article_Section);
+        section.setText(currentSection);
+
+
+
+
+
+
+
 
 
         return articleList;

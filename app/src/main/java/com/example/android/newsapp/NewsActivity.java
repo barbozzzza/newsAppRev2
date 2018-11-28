@@ -98,7 +98,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         mNewsAdapter.clear();
 
         if (news != null && !news.isEmpty()){
-            mNewsAdapter.addAll();
+            mNewsAdapter.addAll(news);
         }
 
     }

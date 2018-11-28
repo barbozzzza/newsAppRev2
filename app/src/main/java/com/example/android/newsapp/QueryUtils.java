@@ -190,7 +190,7 @@ public final class QueryUtils {
 
                 // Create a new NewsStory object with the title, section name, date,
                 // and url from the JSON response.
-                NewsStory newsStory = new NewsStory(title, date, url, authorName);
+                NewsStory newsStory = new NewsStory(title, authorName, date, url,sectionName);
 
                 // Add the new NewsStory to the list of newsStories.
                 newsStories.add(newsStory);
